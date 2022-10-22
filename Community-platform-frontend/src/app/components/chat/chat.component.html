@@ -1,0 +1,208 @@
+
+<!--The content below is only a placeholder and can be replaced.-->
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+
+    
+   <!-- 
+    <div >
+        <div [hidden]="captcha">
+            <div style="width:302px;position:relative; left:50%;transform:translateX(-50%); ">
+                <p >Please check the box to have access to your chat room.</p>
+                <re-captcha (resolved)="resolved($event)" siteKey="6LfK7eAfAAAAANhMqVckwLueUtuRB1sOl_DiDZ02"></re-captcha>
+            </div>
+        </div>
+    </div>
+   -->
+    <!--[hidden]="!captcha"-->
+    <div> 
+        <div id="main-content" class="container" >
+            <div class="row">
+                <div class="col-md-6">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="connect" *ngIf="connected">Disconnect from the room :</label>
+                            
+                            <button (click)="disconnect()" class="btn btn-default" type="submit" *ngIf="connected">Disconnect
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+  
+
+    <div class="container" *ngIf="connected" style="margin-top:-37px">
+        <div class="content container-fluid bootstrap snippets bootdey">
+              <div class="row row-broken">   
+                <div class="col-sm-12 col-xs-12 chat" style="overflow: scroll; outline: none;" tabindex="5001" #scrollMe >
+                  <div class="col-inside-lg decor-default">
+                    <div class="chat-body">
+                      <h6>Chat Room</h6>
+
+                      <div *ngFor="let msg of oldMessages">
+                        <div *ngIf="msg.room===room">
+                        <div [ngClass]="userauth.username === msg.user.username ? 'answer left' : 'answer right'" >
+                        <!--<div class="avatar">
+                          <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User name">
+                          
+                        </div>-->
+                        
+                          <div class="name">{{ msg.user.username}}</div>
+                        <div class="text">
+                            {{ msg.content }}
+                        </div>
+                        <div class="time">{{ msg.dateMessage }}</div>
+                        </div>
+                      </div>
+                        </div>
+                    
+                      
+                        <div *ngFor="let msg of greeting">
+                          <div *ngIf="msg.room===room">
+                          <div [ngClass]="userauth.username === msg.user ? 'answer left' : 'answer right'" >
+                          <!--<div class="avatar">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User name">
+                            
+                          </div>-->
+                          
+                            <div class="name">{{ msg.user}}</div>
+                          <div class="text">
+                              {{ msg.msg }}
+                          </div>
+                          <div class="time">{{formatDate()}}</div>
+                          </div>
+                        </div>
+                          </div>
+
+
+                      
+                   
+                    
+                      <div class="answer-add" style="background-color: rgba(58, 44, 255, 0.814);">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-11">
+                                    <input type="text" [(ngModel)]="name"  name="name" placeholder="Write a message" style="height: 100%">
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-outline-light" style="border-width:2px ;" (click)="sendMessage()" type="submit">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+         </div>
+    </div>
+    
+
+         <div class="row" *ngIf="!connected">
+          <div class="col-lg-4">
+            <div class="card" >
+                <img class="card-img img-fluid" src="assets/images/small/programming.jpg" alt="Card image">
+                <div class="card-img-overlay" style="background-color:rgba(0, 0, 0, 0.577)" >
+                    <h4 class="card-title text-white mt-0" style="font-size:35px; text-align: center; font-weight: bold;">Programming</h4>
+                    <p class="card-text " style="color: rgba(226, 226, 226, 0.899);">This is a wider card with supporting text below
+                        as a natural lead-in to additional content. This content is a little bit longer.
+                    </p>
+                    
+                </div>
+                <div class="button-items">
+                  <button type="button" (click)="connect('programming')" class="btn  btn-lg waves-effect waves-light" style="width:98.1%; border-top-left-radius: 0%;; border-top-right-radius: 0%; background-color: #048e80e9; color:#fff">Connect to this room
+                      </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card">
+              <img class="card-img img-fluid" src="assets/images/small/sport.jpg" alt="Card image">
+              <div class="card-img-overlay" style="background-color:rgba(0, 0, 0, 0.577)" >
+                  <h4 class="card-title text-white mt-0" style="font-size:35px; text-align: center; font-weight: bold;">Sport</h4>
+                  <p class="card-text " style="color: rgba(226, 226, 226, 0.899);">This is a wider card with supporting text below
+                      as a natural lead-in to additional content. This content is a little bit longer.
+                  </p>
+              </div>
+              <div class="button-items">
+                <button type="button" (click)="connect('sport')" class="btn  btn-lg waves-effect waves-light" style="width:98.1%; border-top-left-radius: 0%;; border-top-right-radius: 0%; background-color: #048e80e9; color:#fff">Connect to this room
+                    </button>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card">
+            <img class="card-img img-fluid" src="assets/images/small/music.jpg" alt="Card image">
+            <div class="card-img-overlay" style="background-color:rgba(0, 0, 0, 0.577)">
+                <h4 class="card-title text-white mt-0" style="font-size:35px; text-align: center; font-weight: bold;">Music</h4>
+                <p class="card-text" style="color: rgba(226, 226, 226, 0.899);">This is a wider card with supporting text below
+                    as a natural lead-in to additional content. This content is a little bit longer.
+                </p>
+            </div>
+            <div class="button-items">
+              <button type="button" (click)="connect('music')" class="btn  btn-lg waves-effect waves-light" style="width:98.1%; border-top-left-radius: 0%;; border-top-right-radius: 0%; background-color: #048e80e9; color:#fff">Connect to this room
+                  </button>
+            </div>
+        </div>
+    </div>
+
+    
+      <div class="col-lg-4" >
+        <div class="card" >
+            <img class="card-img img-fluid" style="width: 100%;" src="assets/images/small/camping.jpg" alt="Card image">
+            <div class="card-img-overlay" style="background-color:rgba(0, 0, 0, 0.577)" >
+                <h4 class="card-title text-white mt-0" style="font-size:35px; text-align: center; font-weight: bold;">Camping</h4>
+                <p class="card-text" style="color: rgba(226, 226, 226, 0.899);">This is a wider card with supporting text below
+                    as a natural lead-in to additional content. This content is a little bit longer.
+                </p>
+            </div>
+            <div class="button-items">
+              <button type="button" (click)="connect('camping')" class="btn  btn-lg waves-effect waves-light" style="width:98.1%; border-top-left-radius: 0%;; border-top-right-radius: 0%; background-color: #048e80e9; color:#fff">Connect to this room
+                  </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card" >
+          <img class="card-img img-fluid" src="assets/images/small/painting.jpg" alt="Card image">
+          <div class="card-img-overlay" style="background-color:rgba(0, 0, 0, 0.577)">
+              <h4 class="card-title text-white mt-0" style="font-size:35px; text-align: center; font-weight: bold;">Painting</h4>
+              <p class="card-text" style="color: rgba(226, 226, 226, 0.899);">This is a wider card with supporting text below
+                  as a natural lead-in to additional content. This content is a little bit longer.
+              </p>
+          </div>
+          <div class="button-items">
+            <button type="button" (click)="connect('painting')" class="btn  btn-lg waves-effect waves-light" style="width:98.1%; border-top-left-radius: 0%;; border-top-right-radius: 0%; background-color: #048e80e9; color:#fff">Connect to this room
+                </button>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card"  >
+        <img class="card-img img-fluid" src="assets/images/small/reading.jpg" alt="Card image">
+        <div class="card-img-overlay" style="background-color:rgba(0, 0, 0, 0.577)" >
+            <h4 class="card-title text-white mt-0" style="font-size:35px; text-align: center; font-weight: bold;">Reading</h4>
+            <p class="card-text "style="color: rgba(226, 226, 226, 0.899);">This is a wider card with supporting text below
+                as a natural lead-in to additional content. This content is a little bit longer.
+            </p>
+        </div>
+        <div class="button-items">
+          <button type="button" (click)="connect('reading')" class="btn  btn-lg waves-effect waves-light" style="width:98.1%; border-top-left-radius: 0%;; border-top-right-radius: 0%; background-color: #048e80e9; color:#fff">Connect to this room
+              </button>
+        </div>
+    </div>
+</div>
+
+
+   
+  </div>
+  
+

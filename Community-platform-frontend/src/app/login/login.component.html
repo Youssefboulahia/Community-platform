@@ -1,0 +1,126 @@
+
+<div class="account-bg">
+  
+
+    <!-- Loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+  <div class="account-pages my-5 pt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mt-4">
+                            <div class="mb-3">
+                                <a href="index.html" class="auth-logo">
+                                    <img src="assets/images/logo-dark.png" height="30" class="logo-dark mx-auto"
+                                        alt="">
+                                    <img src="assets/images/logo-light.png" height="30" class="logo-light mx-auto"
+                                        alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div
+                        class="alert alert-success center"
+                        role="alert"
+                        *ngIf="sign_up==='true'"
+                      >
+                      You have successfully registered!
+                      </div>
+                        <div class="p-3">
+                            <h4 class="font-size-18 text-muted mt-2 text-center">Welcome Back !</h4>
+                            <p class="text-muted text-center mb-4">Sign in to continue to Fonik.</p>
+
+                            <form class="form-horizontal" *ngIf="!isLoggedIn"
+                            name="form"
+                            (ngSubmit)="f.form.valid && onSubmit()"
+                            #f="ngForm"
+                            novalidate>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="username">Username</label>
+                                    <input type="text" class="form-control" id="username"
+                                        placeholder="Enter username" name="username"
+                                        [(ngModel)]="form.username"
+                                        required
+                                        #username="ngModel">
+                                </div>
+                                <div
+                                  class="alert alert-danger"
+                                  role="alert"
+                                  *ngIf="f.submitted && username.invalid"
+                                >
+                                  Username is required!
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="userpassword">Password</label>
+                                    <input type="password" class="form-control" id="userpassword"
+                                        placeholder="Enter password" name="password"
+                                        [(ngModel)]="form.password"
+                                        required
+                                        minlength="6"
+                                        #password="ngModel">
+                                </div>
+
+                                <div
+                                  class="alert alert-danger"
+                                  role="alert"
+                                  *ngIf="f.submitted && password.invalid"
+                                >
+                                  <div *ngIf="password.errors">Password is required</div>
+                                  <div *ngIf="password.errors">
+                                    Password must be at least 6 characters
+                                  </div>
+                                </div>
+
+                                <div class="mb-3 row mt-4">
+                                    <div class="col-sm-6">
+                                        <div class="form-checkbox">
+                                            <input type="checkbox" class="form-check-input me-1"
+                                                id="customControlInline">
+                                            <label class="form-label" class="form-check-label"
+                                                for="customControlInline">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 text-end">
+                                        <button class="btn btn-primary w-md waves-effect waves-light"
+                                            type="submit">Log In</button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <div
+                                    class="alert alert-danger"
+                                    role="alert"
+                                    *ngIf="f.submitted && isLoginFailed"
+                                  >
+                                    Login failed
+                                  </div>
+                                </div>
+
+
+                              
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="mt-5 text-center">
+                    <p>Don't have an account ? <a href="register" class="fw-bold text-primary"> Sign up
+                            Now </a> </p>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,120 @@
+<div>
+    
+     <!-- Modal -->
+     <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1" role="dialog"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="staticBackdropLabel">Create a post
+                     </h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                     aria-label="Close">
+                 </button>
+             </div>
+
+             <!-- method="post" enctype="multipart/form-data"-->
+             <form>
+             <div class="modal-body">
+                
+                    <div class="mb-3 position-relative">
+                        <label class="form-label">Subject</label>
+                        <div>
+                            <input type="text" class="form-control"
+                             required [(ngModel)]="post.subject" name="subject"/>
+                        </div>
+                    </div>
+                    <div class="mb-3 position-relative">
+                        <label class="form-label">Content</label>
+                        <div>
+                            <textarea class="form-control" rows="7" required [(ngModel)]="post.content" name="content"></textarea>
+                        </div>
+                    </div>
+                   
+                        <div style="text-align: center; margin-top:20px">
+                            <div class="fallback">
+                                <input name="file" type="file" (change)="onFileChanged($event)">
+                            </div>
+                            <div class="dz-message needsclick">
+                                <div class="mb-3">
+                                    <i class="display-4 text-muted mdi mdi-cloud-upload"></i>
+                                </div>
+    
+                                <h4>Choose an image for your post</h4>
+                            </div>
+                        </div>
+
+                </div>
+             <div class="modal-footer">
+                 <button type="button"
+                     class="btn btn-secondary waves-effect waves-light"
+                     data-bs-dismiss="modal">Close</button>
+                 <button type="submit"
+                     class="btn btn-primary waves-effect waves-light"
+                     data-bs-dismiss="modal"
+                     (click)="savePost()">Save</button>
+             </div>
+            </form>
+         </div>
+     </div>
+ </div>
+    
+      
+  
+        <div style="width:75%;  position:relative;left:50%; transform:translateX(-50%); margin-bottom:40px">
+            <div class="wrap">
+                <div class="search">
+                   <input type="text" [(ngModel)]="searchStr" class="searchTerm" placeholder="What are you looking for?" style="height:100%">
+                   <button type="submit" (click)="searchPosts()" class="searchButton">
+                     <i class="fa fa-search"></i>
+                  </button>
+                </div>
+             </div>
+            <button type="button" class="btn btn-lg btn-primary waves-effect waves-light"
+            data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create a post</button>
+    
+            <a type="button" class="btn btn-lg btn-info waves-effect waves-light" style="margin-left:20px; color: white;"
+            routerLink="/forum/myPosts">My posts</a>
+            <img src="../../../../assets/images/gold-medal-1307.png" alt="user" class="profile-photo-md pull-left" style="width:50px; margin-left: 10%;">
+            <span style="display: inline-block"> <a routerLink="/viewProfile/{{employeeOfTheMonth[2]}}">{{employeeOfTheMonth[1]}}</a> ({{employeeOfTheMonth[0]}}pts) </span>
+        </div>
+   
+
+    
+    
+    <div class="container bootstrap snippets bootdey"  >
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="text-align:center" *ngIf="alertCreatedPost">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close">
+            </button>
+            <strong>Well done!</strong> You have successfully created a post.
+        </div>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align:center" *ngIf="emptyFilter">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close">
+            </button>
+            No search result found.
+        </div>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align:center" *ngIf="noPosts">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close">
+            </button>
+            You have no post created.
+        </div>
+        
+       
+
+        <div class="row">
+        <div class="col-md-4" 
+        *ngFor="let post of posts.reverse(); let i = index">
+            <a routerLink="/forum/post/{{ post.idPost }}">
+                <app-post [post]="post"></app-post>
+            </a>
+        </div>
+       
+      </div>
+    </div>
+</div>

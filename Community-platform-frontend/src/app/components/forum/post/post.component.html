@@ -1,0 +1,26 @@
+<div class="widget widget-blog">
+    <div class="widget-blog-cover">
+        <img [src]="post.retrievedImage" alt="">
+    </div>
+    <div class="widget-blog-author">
+        <div class="widget-blog-author-image">
+            <div *ngIf="post.profile.retrievedImage!=='data:image/jpeg;base64,null'" style="display:inline">
+                <img [src]="post.profile.retrievedImage" alt="" style="width:100%; height:100%">
+            </div>
+            <div *ngIf="post.profile.retrievedImage==='data:image/jpeg;base64,null'" style="display:inline">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
+            </div>
+            
+        </div>
+        <div class="widget-blog-author-info">
+            <h5 class="m-t-0 m-b-1">{{post.user.username}}</h5>
+            <!--<p class="text-muted m-0 f-s-11">Front End Designer</p>-->
+        </div>
+    </div>
+    <div class="widget-blog-content" style="margin-top:10px">
+        <h5>{{post.subject}}</h5>
+        <p>
+            {{post.content  | slice:0:100}}..<span style="color:rgb(52, 52, 201); margin-left:5px">Read more</span>
+        </p>
+    </div>
+</div>

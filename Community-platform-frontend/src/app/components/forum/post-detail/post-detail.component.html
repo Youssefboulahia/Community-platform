@@ -1,0 +1,83 @@
+<div>
+  <!-- Modal delete -->
+  <div class="modal fade " id="deletePost" 
+  data-bs-keyboard="false" tabindex="-1" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Delete post
+                  </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Close">
+              </button>
+          </div>
+          <form>
+          <div class="modal-body">
+            <h5>Are you sure you want to delete this post?</h5>
+          </div>
+          <div class="modal-footer">
+              <button type="button"
+                  class="btn btn-secondary waves-effect waves-light"
+                  data-bs-dismiss="modal">Close</button>
+              <button type="submit"
+                  class="btn btn-primary waves-effect waves-light"
+                  data-bs-dismiss="modal"
+                  (click)="deleteComment()">Confirm</button>
+          </div>
+         </form>
+      </div>
+  </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="post-content">
+              <img [src]="currentPost.retrievedImage" alt="post-image" class="img-responsive post-image" style="height:400px">
+              <div class="post-container">
+                <img [src]="profile.retrievedImage" alt="user" class="profile-photo-md pull-left">
+                <div class="post-detail">
+                  <div class="user-info" style="position: relative;bottom:36px">
+                    <h5><a routerLink="/viewProfile/{{currentPost.user.id}}" class="profile-link">{{currentPost.user.username}}</a> </h5>
+                    <p class="text-muted">Published: {{currentPost.date}}</p>
+                  </div>
+                  <div class="reaction">
+                    <button class="btn text-green" [ngClass]="{'text-white active-like': testLike}" (click)="makeLike()"><i class="fa fa-thumbs-up"></i> {{postLikes}}</button>
+                    <button class="btn text-red" [ngClass]="{'text-white active-dislike': testDislike}" (click)="makeDislike()"><i class="fa fa-thumbs-down"></i> {{postDislikes}}</button>
+                    <span class="text-dark" style="margin-left:5px"><i class="fa fa-eye"> {{currentPost.views}}</i></span>
+                  </div>
+                  <div class="line-divider"></div>
+                  <div class="post-text" style="font-size: 25px;text-align: center; font-weight: bold;">
+                    <p>{{currentPost.subject}}</p>
+                  </div>
+
+                  <div class="post-text" style="font-size: 17px;margin-bottom:30px">
+                    <p>{{currentPost.content}}</p>
+                  </div>
+                  <div class="post-comment" *ngFor="let comment of comments; let i=index">
+                    <img [src]="comment[0].retrievedImage" alt="" class="profile-photo-sm">
+                    <p><a routerLink="/viewProfile/{{comment[0].user.id}}" class="profile-link">{{comment[0].user.username}}</a> {{comment[0].text}} </p>
+                    <button *ngIf="checkUser(comment[1].idUser)"  data-bs-toggle="modal" data-bs-target="#deletePost" (click)="setCommentToDelete(comment[0].idComment)" class="btn btn-outline-danger btn-sm rounded-0" style="position:absolute; right:0px; height:44px">Delete </button>
+                  </div>
+                  <div class="post-comment">
+                    <img [src]="currentUser.retrievedImage" alt="" class="profile-photo-sm">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-11">
+                          <input type="text" class="form-control" placeholder="Post a comment" [(ngModel)]="newComment">
+                        </div>
+                        <div class="col-1">
+                          <button class="btn btn-primary" (click)="addComment()">send</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>  

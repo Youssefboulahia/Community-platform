@@ -1,0 +1,49 @@
+<div class="container" *ngIf="currentUser; else loggedOut">
+  <div class="container rounded bg-white  mb-5">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+              <div *ngIf="profile.retrievedImage!=='data:image/jpeg;base64,null'">
+                <img class="rounded-circle mt-5" style="width:180px; height:185px" [src]="profile.retrievedImage">
+              </div>
+              <div *ngIf="profile.retrievedImage==='data:image/jpeg;base64,null'">
+                <img class="rounded-circle mt-5" style="width:180px; height:185px" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+              </div>
+              <div style="text-align: center; margin-top:15px;margin-bottom:20px">
+                <div class="fallback">
+                    <input name="file" type="file" (change)="onFileChanged($event)">
+                </div>
+                </div>
+              <span class="font-weight-bold">{{currentUser.username}}</span><span class="text-black-50">{{currentUser.email}}</span><span> </span></div>
+            
+          </div>
+        <div class="col-md-6 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">First name</label><input type="text" class="form-control" placeholder="first name" [(ngModel)]="profile.firstName"></div>
+                    <div class="col-md-6"><label class="labels">Last name</label><input type="text" class="form-control" [(ngModel)]="profile.lastName" placeholder="last name"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="number" class="form-control" placeholder="enter phone number"[(ngModel)]="profile.phoneNumber"></div>
+                    <div class="col-md-12"><label class="labels">Interests</label><textarea type="text" class="form-control" placeholder="enter your interests" [(ngModel)]="profile.interests"></textarea></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" [(ngModel)]="profile.country"></div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" [(ngModel)]="profile.region" placeholder="state"></div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" (click)="saveProfile()">Save Profile</button></div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+
+  
+  
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>
