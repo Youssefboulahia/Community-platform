@@ -10,10 +10,6 @@ This project is a travel and Business website.
 
 ## Made-by
 this project was made by:
-* Oussama Sboui
-* Oussama Hamza
-* Aicha Nouisser
-* Assma Abessi
 * Youssef Boulahia
 
 	
